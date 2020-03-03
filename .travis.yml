@@ -6,7 +6,7 @@ before_install:
   - docker build -t javaxiss/react-test -f ./client/Dockerfile.dev .
 
 script:
-  - docker run -e CI=true javaxiss/react-test npm run test -- --coverage
+  - docker run -e CI=true javaxiss/react-test npm run test
 
 after_success:
     - docker build -t javaxiss/multi-client ./client
