@@ -17,6 +17,6 @@ after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # push those images to docker hub
     - docker push javaxiss/multi-client
-    - docker push javaxiss/multi-,ginx
+    - docker push javaxiss/multi-nginx
     - docker push javaxiss/multi-server
     - docker push javaxiss/multi-worker
