@@ -1,10 +1,11 @@
+language: generic
 sudo: required
 services:
     - docker
 env:
     global:
         - GIT_SHA=$(git rev-parse HEAD)
-        - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+        - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
     - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
     - curl https://sdk.cloud.google.com | bash > /dev/null; 
@@ -17,7 +18,7 @@ before_install:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker build -t javaxiss/react-test -f ./client/Dockerfile.dev ./client
 script:
-    - docker run javaxiss/react-test npm test -- --coverage
+    - docker run -e CI=true javaxiss/react-test npm test -- --coverage
 deploy:
     provider: script
     script: bash ./deploy.sh
