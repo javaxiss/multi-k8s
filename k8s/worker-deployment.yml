@@ -13,7 +13,7 @@ spec:
                 component: worker
         spec:
             containers:
-                - name: server
+                - name: worker
                   image: javaxiss/multi-worker
                   env:
                     - name: REDIS_HOST
